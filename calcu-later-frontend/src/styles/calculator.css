@@ -1,6 +1,7 @@
+/* Calculator-specific styles */
 .calculator {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   background: rgba(255, 255, 255, 0.1);
@@ -10,7 +11,8 @@
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 4px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 6px solid rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
 }
 
 .mode-selector {
@@ -53,7 +55,6 @@
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
 }
 
-/* Style for dropdown options */
 .mode-selector select option {
   background: rgba(0, 0, 0, 0.9);
   color: white;
@@ -65,7 +66,6 @@
   background: rgba(102, 126, 234, 0.3);
 }
 
-/* Selected option styling */
 .mode-selector select option:checked {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
@@ -80,26 +80,9 @@
   height: 110px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
-}
-
-.display::-webkit-scrollbar {
-  width: 6px;
-}
-
-.display::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.display::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-}
-
-.display::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
 }
 
 .calculation {
@@ -132,22 +115,14 @@
   flex-shrink: 0;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .keypad {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
   margin-bottom: 5px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .keypad button {
@@ -162,6 +137,8 @@
   transition: all 0.2s ease;
   backdrop-filter: blur(5px);
   min-height: 40px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .keypad button:hover {
@@ -175,7 +152,6 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Special styling for operation buttons */
 .keypad button:nth-child(4n) {
   background: rgba(102, 126, 234, 0.3);
   border-color: rgba(102, 126, 234, 0.5);
@@ -185,30 +161,27 @@
   background: rgba(102, 126, 234, 0.5);
 }
 
-/* Special styling for equals button */
-.keypad button:nth-child(23) {
+.keypad button:nth-child(22) {
   background: rgba(34, 197, 94, 0.3);
   border-color: rgba(34, 197, 94, 0.5);
   font-weight: bold;
 }
 
-.keypad button:nth-child(23):hover {
+.keypad button:nth-child(22):hover {
   background: rgba(34, 197, 94, 0.5);
 }
 
-/* Special styling for clear buttons */
-.keypad button:nth-child(25),
-.keypad button:nth-child(26) {
+.keypad button:nth-child(24),
+.keypad button:nth-child(25) {
   background: rgba(239, 68, 68, 0.3);
   border-color: rgba(239, 68, 68, 0.5);
 }
 
-.keypad button:nth-child(25):hover,
-.keypad button:nth-child(26):hover {
+.keypad button:nth-child(24):hover,
+.keypad button:nth-child(25):hover {
   background: rgba(239, 68, 68, 0.5);
 }
 
-/* Give up button styling */
 .give-up-btn {
   background: rgba(239, 68, 68, 0.8) !important;
   border-color: rgba(239, 68, 68, 0.9) !important;
@@ -222,44 +195,57 @@
   transform: translateY(-2px) !important;
 }
 
+/* Custom animations that can't be done with Tailwind */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .calculator {
-    max-width: 500px;
-    padding: 22px;
+    max-width: 100%;
+    padding: 18px;
+    margin: 0 10px;
   }
   
   .keypad {
-    gap: 8px;
+    gap: 6px;
   }
   
   .keypad button {
-    padding: 13px 8px;
-    font-size: 0.95rem;
-    min-height: 42px;
+    padding: 10px 6px;
+    font-size: 0.85rem;
+    min-height: 38px;
   }
 }
 
 @media (max-width: 480px) {
   .calculator {
-    padding: 18px;
-    margin: 0 10px;
+    padding: 15px;
+    margin: 0 8px;
     max-width: 100%;
   }
   
   .display {
     height: 100px;
-    padding: 15px;
+    padding: 12px;
   }
   
   .keypad {
-    gap: 8px;
+    gap: 4px;
   }
   
   .keypad button {
-    padding: 12px 6px;
-    font-size: 0.85rem;
-    min-height: 40px;
+    padding: 8px 4px;
+    font-size: 0.75rem;
+    min-height: 35px;
   }
   
   .calculation {
@@ -277,6 +263,56 @@
   .give-up-btn {
     font-size: 0.8rem !important;
     padding: 8px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .calculator {
+    padding: 12px;
+    margin: 0 5px;
+  }
+  
+  .keypad {
+    gap: 3px;
+  }
+  
+  .keypad button {
+    padding: 6px 3px;
+    font-size: 0.7rem;
+    min-height: 32px;
+  }
+  
+  .mode-selector select {
+    min-width: 120px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .calculator {
+    padding: 10px;
+    margin: 0 3px;
+  }
+  
+  .keypad {
+    gap: 2px;
+  }
+  
+  .keypad button {
+    padding: 5px 2px;
+    font-size: 0.65rem;
+    min-height: 30px;
+  }
+  
+  .mode-selector label {
+    font-size: 1rem;
+  }
+  
+  .mode-selector select {
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
   }
 }
 

@@ -18,7 +18,7 @@ export default function Keypad({ onButtonClick, showGiveUp, showEnter }) {
       ))}
       {showEnter && !showGiveUp && (
         <button 
-          className="enter-btn" 
+          className="enter-btn"
           onClick={() => onButtonClick("ENTER")}
           style={{
             gridColumn: "span 7",
@@ -78,7 +78,8 @@ export default function Keypad({ onButtonClick, showGiveUp, showEnter }) {
             marginTop: "8px",
             background: "rgba(239, 68, 68, 0.8)",
             borderColor: "rgba(239, 68, 68, 0.9)",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            color: "white"
           }}
         >
           😅 GIVE UP

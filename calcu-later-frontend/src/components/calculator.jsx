@@ -78,7 +78,7 @@ export default function Calculator() {
     if (calculatedResult && !showResult) {
       const timer = setTimeout(() => {
         setShowResult(true);
-      }, 1500); // 1.5 second delay
+      }, 1500); // 3 second delay
 
       return () => clearTimeout(timer);
     }
@@ -116,8 +116,8 @@ export default function Calculator() {
         // Check for division by zero before evaluation
         if (expression.includes('/0') || expression.includes('/ 0')) {
           setResponse("Did you just divide by zero? Because that's how you break the internet. You're impossible! 😱");
-          setCalculatedResult("");
-          setShowResult(false);
+          setCalculatedResult(`${expression} = undefined`);
+          setShowResult(true);
           setExpression("");
           return;
         }
@@ -126,8 +126,49 @@ export default function Calculator() {
         let evalExpr = expression
           .replace(/π/g, pi)
           .replace(/√/g, "sqrt(")
-          .replace(/median/g, "median")
           .replace(/log/g, "log10");
+        
+        // Handle trigonometric functions - they expect radians by default
+        // Convert degrees to radians for user convenience
+        evalExpr = evalExpr.replace(/sin(\d+)/g, (match, angle) => {
+          const radians = (parseFloat(angle) * Math.PI) / 180;
+          return `sin(${radians})`;
+        });
+        
+        evalExpr = evalExpr.replace(/cos(\d+)/g, (match, angle) => {
+          const radians = (parseFloat(angle) * Math.PI) / 180;
+          return `cos(${radians})`;
+        });
+        
+        evalExpr = evalExpr.replace(/tan(\d+)/g, (match, angle) => {
+          const radians = (parseFloat(angle) * Math.PI) / 180;
+          return `tan(${radians})`;
+        });
+        
+        // Handle median function - convert to array and calculate median
+        evalExpr = evalExpr.replace(/median\(([^)]+)\)/g, (match, numbers) => {
+          try {
+            // Use + as separator between numbers (since + is available on the keypad)
+            // This allows for multi-digit numbers like median(123+456+789)
+            const numArray = numbers.split('+')
+              .map(n => parseFloat(n.trim()))
+              .filter(n => !isNaN(n));
+            
+            if (numArray.length === 0) {
+              throw new Error('No valid numbers found');
+            }
+            
+            const sorted = numArray.sort((a, b) => a - b);
+            const mid = Math.floor(sorted.length / 2);
+            if (sorted.length % 2 === 0) {
+              return (sorted[mid - 1] + sorted[mid]) / 2;
+            } else {
+              return sorted[mid];
+            }
+          } catch (error) {
+            throw new Error('Invalid median input');
+          }
+        });
         
         // Add closing parenthesis for sqrt if it's missing
         if (evalExpr.includes("sqrt(") && !evalExpr.includes("sqrt()")) {
@@ -138,7 +179,7 @@ export default function Calculator() {
         const result = evaluate(evalExpr);
         
         if (mode === "fun") {
-          setCalculatedResult(String(result));
+          setCalculatedResult(`${expression} = ${result}`);
           setShowResult(false);
           const diff = getDifficulty(expression);
           const response = getNextResponse(diff);
@@ -161,11 +202,13 @@ export default function Calculator() {
         // Check if it's a division by zero error from mathjs
         if (error.message && error.message.includes('Division by zero')) {
           setResponse("Did you just divide by zero? Because that's how you break the internet. You're impossible! 😱");
+          setCalculatedResult(`${expression} = undefined`);
+          setShowResult(true);
         } else {
           setResponse("Bruh… that's not even math. 😑");
+          setCalculatedResult("");
+          setShowResult(false);
         }
-        setCalculatedResult("");
-        setShowResult(false);
         setExpression(""); // Clear on error too
       }
     } else if (btn === "AC") {

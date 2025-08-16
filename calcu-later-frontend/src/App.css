@@ -1,15 +1,17 @@
+/* App-specific styles */
 #root {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  padding: 20px 0;
+  padding: 0;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
+  background-color: #282c34;
 }
 
 .App {
@@ -17,16 +19,12 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-}
-
-.title-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  text-align: center;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .App h1 {
@@ -51,6 +49,16 @@
   text-align: center;
 }
 
+/* Custom animations that can't be done with Tailwind */
+@keyframes titleGlow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+}
+
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -63,20 +71,10 @@
   }
 }
 
-@keyframes titleGlow {
-  from {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-  to {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.3);
-  }
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .title-container {
-    gap: 10px;
-    margin-bottom: 1.5rem;
+  .App {
+    padding: 0 15px;
   }
   
   .App h1 {
@@ -89,10 +87,8 @@
 }
 
 @media (max-width: 600px) {
-  .title-container {
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 1.5rem;
+  .App {
+    padding: 0 10px;
   }
   
   .App h1 {
@@ -104,9 +100,9 @@
   }
 }
 
-@media (max-height: 600px) {
-  .title-container {
-    margin-bottom: 1rem;
+@media (max-width: 480px) {
+  .App {
+    padding: 0 8px;
   }
   
   .App h1 {
@@ -118,38 +114,40 @@
   }
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 400px) {
+  .App {
+    padding: 0 5px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .App h1 {
+    font-size: 1.6rem;
+  }
+  
+  .funny-subtitle {
+    font-size: 0.8rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 360px) {
+  .App {
+    padding: 0 3px;
+  }
+  
+  .App h1 {
+    font-size: 1.4rem;
+  }
+  
+  .funny-subtitle {
+    font-size: 0.75rem;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+@media (max-height: 600px) {
+  .App h1 {
+    font-size: 1.8rem;
+  }
+  
+  .funny-subtitle {
+    font-size: 0.9rem;
+  }
 }

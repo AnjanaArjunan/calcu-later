@@ -1,0 +1,347 @@
+.calculator {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 4px solid rgba(255, 255, 255, 0.5);
+}
+
+.mode-selector {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.mode-selector label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.mode-selector select {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+  backdrop-filter: blur(5px);
+}
+
+.mode-selector select:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mode-selector select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+/* Style for dropdown options */
+.mode-selector select option {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.mode-selector select option:hover {
+  background: rgba(102, 126, 234, 0.3);
+}
+
+/* Selected option styling */
+.mode-selector select option:checked {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: bold;
+}
+
+.display {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.display::-webkit-scrollbar {
+  width: 6px;
+}
+
+.display::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.display::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.display::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.calculation {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  word-wrap: break-word;
+  min-height: 1.2em;
+  flex-shrink: 0;
+}
+
+.response {
+  font-size: 1rem;
+  color: #4ade80;
+  font-style: italic;
+  word-wrap: break-word;
+  line-height: 1.3;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}
+
+.result {
+  font-size: 1.5rem;
+  color: #fbbf24;
+  font-weight: bold;
+  word-wrap: break-word;
+  line-height: 1.3;
+  margin-top: 4px;
+  animation: fadeIn 0.5s ease-in;
+  flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.keypad button {
+  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(5px);
+  min-height: 40px;
+}
+
+.keypad button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.keypad button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Special styling for operation buttons */
+.keypad button:nth-child(4n) {
+  background: rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.keypad button:nth-child(4n):hover {
+  background: rgba(102, 126, 234, 0.5);
+}
+
+/* Special styling for equals button */
+.keypad button:nth-child(23) {
+  background: rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.5);
+  font-weight: bold;
+}
+
+.keypad button:nth-child(23):hover {
+  background: rgba(34, 197, 94, 0.5);
+}
+
+/* Special styling for clear buttons */
+.keypad button:nth-child(25),
+.keypad button:nth-child(26) {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.keypad button:nth-child(25):hover,
+.keypad button:nth-child(26):hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+
+/* Give up button styling */
+.give-up-btn {
+  background: rgba(239, 68, 68, 0.8) !important;
+  border-color: rgba(239, 68, 68, 0.9) !important;
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  padding: 12px !important;
+}
+
+.give-up-btn:hover {
+  background: rgba(239, 68, 68, 1) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .calculator {
+    max-width: 500px;
+    padding: 22px;
+  }
+  
+  .keypad {
+    gap: 8px;
+  }
+  
+  .keypad button {
+    padding: 13px 8px;
+    font-size: 0.95rem;
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator {
+    padding: 18px;
+    margin: 0 10px;
+    max-width: 100%;
+  }
+  
+  .display {
+    height: 100px;
+    padding: 15px;
+  }
+  
+  .keypad {
+    gap: 8px;
+  }
+  
+  .keypad button {
+    padding: 12px 6px;
+    font-size: 0.85rem;
+    min-height: 40px;
+  }
+  
+  .calculation {
+    font-size: 1.3rem;
+  }
+  
+  .response {
+    font-size: 0.85rem;
+  }
+  
+  .result {
+    font-size: 1.2rem;
+  }
+  
+  .give-up-btn {
+    font-size: 0.8rem !important;
+    padding: 8px !important;
+  }
+}
+
+@media (max-height: 700px) {
+  .calculator {
+    padding: 20px;
+  }
+  
+  .display {
+    height: 95px;
+    padding: 15px;
+  }
+  
+  .keypad button {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+    min-height: 40px;
+  }
+  
+  .mode-selector {
+    margin-bottom: 15px;
+  }
+  
+  .mode-selector label {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  
+  .mode-selector select {
+    padding: 10px 16px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .calculator {
+    padding: 15px;
+  }
+  
+  .display {
+    height: 85px;
+    padding: 12px;
+  }
+  
+  .keypad button {
+    padding: 10px 6px;
+    font-size: 0.85rem;
+    min-height: 35px;
+  }
+  
+  .keypad {
+    gap: 6px;
+  }
+  
+  .mode-selector {
+    margin-bottom: 12px;
+  }
+  
+  .mode-selector label {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  
+  .mode-selector select {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
